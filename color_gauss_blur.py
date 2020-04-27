@@ -1,20 +1,20 @@
-#improvement needed:8,make the code more modular.
 #------------------------------------
 import matplotlib.pyplot as plt
 import skimage 
 from skimage import color
 import numpy as np
 #------------------------------------
-x=plt.imread("s1.png")     #enter your file here, and  make sure file is within 400x400 and is in .png format
+x=plt.imread("sprl1.png")
 #x=color.rgba2rgb(x)
-y=x[0:400,0:400,:]
+y=x
 n=int(input())
-
+le=y.shape[0]
+bd=y.shape[1]
 #------------------------------------
 def frame(y):
-    y2=np.ones(shape=(400+(2*n),400+(2*n)))
-    for i in range(0,400):
-        for j in range(0,400):
+    y2=np.ones(shape=(le+(2*n),bd+(2*n)))
+    for i in range(0,le):
+        for j in range(0,bd):
             y2[(i+n),(j+n)]=y[i,j]
     return(y2)
 #------------------------------------
@@ -26,16 +26,16 @@ def kernel(p):
     k=np.zeros(shape=(p,p))
     for i in range(0,p):
         for j in range(0,p):
-            k[i,j]=1.005**(-(n-i)**2-(n-j)**2)
+            k[i,j]=1.00005**(-(n-i)**2-(n-j)**2)
     k=k/(np.sum(k))
     return(k)
 #print(kernel(p).shape)
 #------------------------------------
 
 def blur(arr,k,y2):
-    z=np.zeros(shape=(400,400))
-    for i in range(0,400):
-        for j in range(0,400):
+    z=np.zeros(shape=(le,bd))
+    for i in range(0,le):
+        for j in range(0,bd):
             z[i,j]=np.sum(k*(y2[i:(i+n+2+n-1),j:(j+n+2+n-1)]))
     return(z)
 #------------------------------------
