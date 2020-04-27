@@ -1,10 +1,11 @@
+#improvement needed:8,make the code more modular.
 #------------------------------------
 import matplotlib.pyplot as plt
 import skimage 
 from skimage import color
 import numpy as np
 #------------------------------------
-x=plt.imread("s1.png")
+x=plt.imread("s1.png")     #enter your file here, and  make sure file is within 400x400 and is in .png format
 #x=color.rgba2rgb(x)
 y=x[0:400,0:400,:]
 n=int(input())
